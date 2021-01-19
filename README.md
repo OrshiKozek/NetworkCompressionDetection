@@ -22,6 +22,7 @@ TABLE OF CONTENTS
 
 PROJECT OVERVIEW
 ================
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 Project Specification: http://cs486.cs.usfca.edu/v/projects/CS486_Fall_2020_Project.pdf
 
@@ -34,6 +35,7 @@ The standalone application operates on one machine, only requiring a running, bu
 
 REQUIREMENTS
 ============
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 A JSON parsing library and a packet capture library is necessary to compile and run the code. You can install the necessary packages on a Linux system with the following commands. When compiling the client application code, the -ljson-c flag must be included. When compiling the standalone application code, the flags -ljson-c and -lpcap must both be included. The server code does not require any additional flags to compile.
 
@@ -46,6 +48,7 @@ Pcap:
 
 CONFIGURATION FILE
 ==================
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 The client application and the standalone application both take in a filename as a command line argument from which to read the configuration information. The program utilizes the JSON-C library to parse the information and store it in a custom struct. The client and server applications both use this information, as does the standalone application.
 
@@ -70,11 +73,13 @@ An example file (e.g. config_file.json) is shown below. The elements of the file
 
 CLIENT-SERVER APPLICATION
 =========================
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 This application is made up of a client host and a server host, which communicate through sockets in an attempt to check for network compression. There are three phases to this process: pre-probing, probing, and post-probing.
 
 ----------------
 ### Running the program
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 Note: The server program must be run first for the programs to work correctly.
 
@@ -86,11 +91,13 @@ The application can be run by executing this command: ./a.out config_file.json
 
 ----------------
 ### Pre-probing Phase:
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 The server creates a TCP socket and binds to a port. The server application then listens for any client connections. Meanwhile, the client parses the information from the provided configuration file. The client then creates a socket and establishes a connection with the server. Once connected, the client sends the configuration information to the server, which parses the received information. This information is now accessible to both the client and the server application.
 
 ----------------
 ### Probing Phase:
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 The server sets up a UDP socket prepared to accept the specified number of UDP packets from the client. The client creates the specified number of UDP packets to send to the server. The client does this by creating an array of bytes that is populated with low entropy data (all 0s). Then the packet ID's are set for each section in the array. The dont-fragment bit is set on each packet before it is sent. Then these packets are sent back-to-back to the server application. The program waits for the given inter-measurement time "i_m_time" before repeating the process with high entropy data. This is achieved by populating the entire array with random data, setting the packet ID's again, and sending them back-to-back to the server again.
 
@@ -98,6 +105,7 @@ Meanwhile, the server is continually accepting packets from the client, first wa
 
 ----------------	
 ### Post-Probing Phase:
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 The client establishes a connection with the server, who, after accepting the connection from the client, sends back the information about network compression. The client displays the results of the investigation (whether network compression was detected or not) and both parties terminate the connection.
 
@@ -105,17 +113,20 @@ The client establishes a connection with the server, who, after accepting the co
 
 STANDALONE APPLICATION
 ======================
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 This application is made up of a client host which uses raw sockets and regular sockets in an attempt to check for network compression.
 
 ---------------------
 ### Running the program
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 To compile the program, the following command must be used: gcc standalone.c -ljson-c -lpcap
 To run the program, the following command must be used: sudo ./a.out config_file.json
 
 ------------------------
 ### The Standalone Program
+<p align="right"><a href="https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents" align="right">[top]</a></p>
 
 The goal of the standalone application is to detect network compression by sending custom TCP SYN packets to an unresponsive server, and measure the time between the server's responses (in the form of a TCP RST packets).
 
@@ -127,4 +138,5 @@ While these packets are being constructed and sent, a child process has been cre
 
 In the event where a timeout occurs, the application terminates due to insufficient information. A timeout could be caused when the server doesn't send a RST packet in a timely manner, or doesn't sent a RST packet at all.
 
+---------------------
 ### [Jump to Table of Contents](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents)
