@@ -1,20 +1,23 @@
 Author: Orshi Kozek
+
 CS 486: Network Security Fall 2020
+
+---------------------
 
 TABLE OF CONTENTS
 =================
 
-* Project Overview
-* Requirements
-* Configuration File
-* Client-Server Application
-	* Running the program
-	* Pre-probing Phase
-	* Probing Phase
-	* Post-probing Phase
-* Standalone Application
-	* Running the program
-	* The Standalone program
+* [Project Overview](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#project-overview)
+* [Requirements](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#requirements)
+* [Configuration File](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#configuration-file)
+* [Client-Server Application](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#client-server-application)
+	* [Running the program](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#running-the-program)
+	* [Pre-probing Phase](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#pre-probing-phase)
+	* [Probing Phase](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#probing-phase)
+	* [Post-probing Phase](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#post-probing-phase)
+* [Standalone Application](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#standalone-application)
+	* [Running the program](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#running-the-program-1)
+	* [The Standalone program](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#the-standalone-program)
 
 
 PROJECT OVERVIEW
@@ -123,3 +126,5 @@ The program waits for inter-measurement time before repeating the above process 
 While these packets are being constructed and sent, a child process has been created and tasked with listening for returning TCP RST packets from the server. The child process does this by utilizing the pcap library. The program listens for packets that match a specific filter. The time between the arrival of each packet is calculated. The time between the return of the first RST packet and the second RST packet is calculated for both low and high entropy data. The difference in times is measured against the 100ms threshold, like in the Client-Server Application. The result of the calculation is displayed and the program terminates.
 
 In the event where a timeout occurs, the application terminates due to insufficient information. A timeout could be caused when the server doesn't send a RST packet in a timely manner, or doesn't sent a RST packet at all.
+
+### [Jump to Table of Contents](https://github.com/OrshiKozek/NetworkCompressionDetection/blob/main/README.md#table-of-contents)
